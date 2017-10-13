@@ -6,11 +6,11 @@ using System.Web.Mvc;
 
 namespace ASPMVC_EF_Music.Controllers
 {
-    public class HomeController : Controller
+    public class MusicController : Controller
     {
         public ActionResult Index()
         {
-            return View();
+            return View("test");
         }
 
         public ActionResult About()
