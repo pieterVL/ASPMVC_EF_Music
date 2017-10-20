@@ -10,7 +10,7 @@ namespace ASPMVC_EF_Music.Controllers
     {
         public ActionResult Index()
         {
-            return View("test");
+                return View();
         }
 
         public ActionResult About()

@@ -13,7 +13,7 @@ namespace ASPMVC_EF_Music.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201710061803448_initial"; }
+            get { return "201710131442000_initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -128,10 +128,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\MusicController.cs" />
+    <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="DAL\MusicContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710131442000_initial.cs" />
+    <Compile Include="Migrations\201710131442000_initial.Designer.cs">
+      <DependentUpon>201710131442000_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Album.cs" />
@@ -179,7 +185,18 @@
     <Content Include="Views\Music\About.cshtml" />
     <Content Include="Views\Music\Contact.cshtml" />
     <Content Include="Views\Music\Index.cshtml" />
-    <Content Include="Views\Music\test.cshtml" />
+    <Content Include="Views\Music\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_LandingpageLayout.cshtml" />
+    <Content Include="Views\Track\Create.cshtml" />
+    <Content Include="Views\Track\Delete.cshtml" />
+    <Content Include="Views\Track\Details.cshtml" />
+    <Content Include="Views\Track\Edit.cshtml" />
+    <Content Include="Views\Track\Index.cshtml" />
+    <Content Include="Views\Album\Create.cshtml" />
+    <Content Include="Views\Album\Delete.cshtml" />
+    <Content Include="Views\Album\Details.cshtml" />
+    <Content Include="Views\Album\Edit.cshtml" />
+    <Content Include="Views\Album\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -191,6 +208,11 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710131442000_initial.resx">
+      <DependentUpon>201710131442000_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

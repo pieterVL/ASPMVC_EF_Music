@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ASPMVC_EF_Music.Album>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.releasedate)
+        </th>
+        <th></th>
+    </tr>
+   @foreach (var album in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => album.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => album.releasedate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=album.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=album.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=album.Id })
+        </td>
+    </tr>
+}
+
+</table>
