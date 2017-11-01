@@ -17,8 +17,25 @@ namespace ASPMVC_EF_Music.Controllers
 
         // GET: Role
         public ActionResult Index()
+        {            
+            return View(new RoleCreateList() {
+                Role = new Role() { role=""},
+                ExistingRoles = db.Roles.ToList()
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index([Bind(Include = "Id,role")] Role role)
         {
-            return View(db.Roles.ToList());
+            if (ModelState.IsValid)
+            {
+                db.Roles.Add(role);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(role);
         }
 
         // GET: Role/Details/5
@@ -33,29 +50,6 @@ namespace ASPMVC_EF_Music.Controllers
             {
                 return HttpNotFound();
             }
-            return View(role);
-        }
-
-        // GET: Role/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Role/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,role")] Role role)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Roles.Add(role);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
             return View(role);
         }
 

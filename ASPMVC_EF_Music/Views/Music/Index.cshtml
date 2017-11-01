@@ -4,29 +4,48 @@
 
 <div class="jumbotron">
     <h1>My Music Application</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <p class="lead">ASP.NET is a free web framework for building great Music Web applications using HTML, CSS, JavaScript and your imagination with the power of love.</p>
 </div>
 
+@*@Html.ActionLink("linktext", "actionname", "controllername");*@
 <div class="row">
-    @Html.ActionLink("Tracks", "Index", "Track");
-    <div class="col-md-4">
-        <h2>Getting started</h2>
+    <div class="col-md-2 col-md-offset-1">
+        <h2>Track</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            It's all about the Tracks
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p>@Html.ActionLink("Tracks", "Index", "Track", null, new { @class= "btn btn-primary"})</p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+    <div class="col-md-2">
+        <h2>Album</h2>
+        <p>
+            Albums give tracks a place to come home.
+        </p>
+        <p>@Html.ActionLink("Albums", "Index", "Album", null, new { @class = "btn btn-primary" })</p>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+    <div class="col-md-2">
+        <h2>Person</h2>
+        <p>
+            Without Persons a track is just a track.
+        </p>
+        <p>@Html.ActionLink("Persons", "Index", "Person", null, new { @class = "btn btn-primary" })</p>
+    </div>
+
+    <div class="col-md-2">
+        <h2>Role</h2>
+        <p>
+            Without Role a person is just a persone.
+        </p>
+        <p>@Html.ActionLink("Roles", "Index", "Role", null, new { @class = "btn btn-primary" })</p>
+    </div>
+
+    <div class="col-md-2">
+        <h2>Genre</h2>
+        <p>
+            Tracks come in all shapes and sizes and each of them can have a part in a limitless combination of different genres.
+        </p>
+        <p>@Html.ActionLink("Genres", "Index", "Genre", null, new { @class = "btn btn-primary" })</p>
     </div>
 </div>

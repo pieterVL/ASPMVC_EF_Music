@@ -161,6 +161,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\RoleCreateList.cs" />
     <Compile Include="Models\GenreCreateList.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Role.cs" />

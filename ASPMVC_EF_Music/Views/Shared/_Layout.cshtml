@@ -21,8 +21,11 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*@Html.ActionLink("linktext", "actionname", "controllername");*@
-                    <li>@Html.ActionLink("About", "About", "Music")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Music")</li>
+                    <li>@Html.ActionLink("Tracks", "Index", "Track")</li>
+                    <li>@Html.ActionLink("Albums", "Index", "Album")</li>
+                    <li>@Html.ActionLink("Persons", "Index", "Person")</li>
+                    <li>@Html.ActionLink("Roles", "Index", "Role")</li>
+                    <li>@Html.ActionLink("Genres", "Index", "Genre")</li>
                 </ul>
             </div>
         </div>
@@ -31,7 +34,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My Music Application</p>
+            <p>&copy; @DateTime.Now.Year - <strong>Van Leuven Pieter</strong> - My Music Application</p>
         </footer>
     </div>
 
