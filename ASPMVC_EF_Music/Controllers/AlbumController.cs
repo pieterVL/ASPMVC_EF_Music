@@ -90,6 +90,42 @@ namespace ASPMVC_EF_Music.Controllers
             return View(album);
         }
 
+        // GET: Album/Tracks/5
+        public ActionResult Tracks(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Album album = db.Albums.Find(id);          
+
+            if (album == null)
+            {
+                return HttpNotFound();
+            }
+            List<Track_Album> track_albums
+                = db.Track_Album.Where(t_a => t_a.AlbumId == album.Id).ToList();
+
+            track_albums.ForEach(t_a => t_a.Track 
+                = db.Tracks.Where(t => t.Id == t_a.TrackId).First()
+            );
+            //.OrderBy(t_a => t_a.TrackSequence)
+            return View(track_albums);
+        }
+
+        // POST: Album/RemoveTrackLink/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveTrackLink(int id)
+        {
+            Track_Album t_a = db.Track_Album.Find(id);
+            db.Track_Album.Remove(t_a);
+            db.SaveChanges();
+            return RedirectToAction("Tracks",new {id= t_a.AlbumId });
+            
+        }
+
         // GET: Album/Delete/5
         public ActionResult Delete(int? id)
         {

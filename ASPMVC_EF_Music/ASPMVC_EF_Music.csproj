@@ -161,8 +161,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Genre.cs" />
-    <Compile Include="Models\RoleCreateList.cs" />
-    <Compile Include="Models\GenreCreateList.cs" />
+    <Compile Include="Models\MergeViews\RoleCreateList.cs" />
+    <Compile Include="Models\MergeViews\GenreCreateList.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Track.cs" />
@@ -235,6 +235,7 @@
     <Content Include="Views\Genre\Details.cshtml" />
     <Content Include="Views\Genre\Edit.cshtml" />
     <Content Include="Views\Genre\Index.cshtml" />
+    <Content Include="Views\Album\Tracks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

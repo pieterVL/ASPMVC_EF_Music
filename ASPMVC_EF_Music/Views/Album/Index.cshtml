@@ -28,7 +28,8 @@
             @Html.DisplayFor(modelItem => album.releasedate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=album.Id }) |
+            @Html.ActionLink("Edit", "Edit", new { id = album.Id }) |
+            @Html.ActionLink("Tracks", "Tracks", new { id=album.Id }) |
             @Html.ActionLink("Details", "Details", new { id=album.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=album.Id })
         </td>

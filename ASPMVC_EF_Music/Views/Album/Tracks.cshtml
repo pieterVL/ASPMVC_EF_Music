@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ASPMVC_EF_Music.Track_Album>
+
+@{
+    ViewBag.Title = "Tracks";
+}
+
+<h2>Album Tracks</h2>
+
+<div>
+    <hr />
+    <div class="">
+        @foreach (Track_Album t_a in Model)
+        {
+           <div>
+               <p>TrackSequence: @(t_a.TrackSequence)</p>
+               <p>
+                   Naam:
+                   @Html.ActionLink(t_a.Track.name, "Details", "Track",
+                     new { id = t_a.TrackId },
+                     new { @class = "" }
+                   )
+               </p>
+
+                @*@Html.ActionLink("Remove", "Removetracklink", "Album",
+                 new { id = t_a.Id },
+                 new { @class = "btn btn-xs btn-default" }
+                )*@
+
+               @using (Html.BeginForm("RemoveTrackLink", "Album", new { id = t_a.Id }, FormMethod.Post,null))
+               {
+                   @Html.AntiForgeryToken()
+                   <div class="form-actions no-color">
+                       <input type="submit" value="Delete" class="btn btn-xs btn-default" />
+                   </div>
+               }
+
+               <hr/>
+            </div>
+        }
+    </div>
+</div>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
