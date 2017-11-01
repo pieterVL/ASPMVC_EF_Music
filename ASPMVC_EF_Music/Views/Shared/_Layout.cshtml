@@ -37,6 +37,13 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
     @RenderSection("scripts", required: false)
+    <script>
+        jQuery('.datepicker').datetimepicker({
+            timepicker: false,
+            format: 'Y/m/d'
+        });
+    </script>
 </body>
 </html>

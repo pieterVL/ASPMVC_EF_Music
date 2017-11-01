@@ -129,7 +129,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
+    <Compile Include="Controllers\GenreController.cs" />
     <Compile Include="Controllers\MusicController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="DAL\MusicContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -139,9 +142,26 @@
     <Compile Include="Migrations\201710131442000_initial.Designer.cs">
       <DependentUpon>201710131442000_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710201257024_change2.cs" />
+    <Compile Include="Migrations\201710201257024_change2.Designer.cs">
+      <DependentUpon>201710201257024_change2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710301045350_change-3.cs" />
+    <Compile Include="Migrations\201710301045350_change-3.Designer.cs">
+      <DependentUpon>201710301045350_change-3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710301134207_change21.cs" />
+    <Compile Include="Migrations\201710301134207_change21.Designer.cs">
+      <DependentUpon>201710301134207_change21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711011136406_change4.cs" />
+    <Compile Include="Migrations\201711011136406_change4.Designer.cs">
+      <DependentUpon>201711011136406_change4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\GenreCreateList.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Track.cs" />
@@ -153,6 +173,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.datetimepicker.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -163,6 +184,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.datetimepicker.full.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -197,6 +219,21 @@
     <Content Include="Views\Album\Details.cshtml" />
     <Content Include="Views\Album\Edit.cshtml" />
     <Content Include="Views\Album\Index.cshtml" />
+    <Content Include="Views\Person\Create.cshtml" />
+    <Content Include="Views\Person\Delete.cshtml" />
+    <Content Include="Views\Person\Details.cshtml" />
+    <Content Include="Views\Person\Edit.cshtml" />
+    <Content Include="Views\Person\Index.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Role\Details.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Genre\Create.cshtml" />
+    <Content Include="Views\Genre\Delete.cshtml" />
+    <Content Include="Views\Genre\Details.cshtml" />
+    <Content Include="Views\Genre\Edit.cshtml" />
+    <Content Include="Views\Genre\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -212,6 +249,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710131442000_initial.resx">
       <DependentUpon>201710131442000_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710201257024_change2.resx">
+      <DependentUpon>201710201257024_change2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710301045350_change-3.resx">
+      <DependentUpon>201710301045350_change-3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710301134207_change21.resx">
+      <DependentUpon>201710301134207_change21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711011136406_change4.resx">
+      <DependentUpon>201711011136406_change4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

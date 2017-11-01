@@ -13,6 +13,7 @@ namespace ASPMVC_EF_Music
         [Required]
         public string name { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime releasedate { get; set; }
     }
 }
