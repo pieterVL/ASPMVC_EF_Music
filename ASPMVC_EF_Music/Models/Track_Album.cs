@@ -10,7 +10,8 @@ namespace ASPMVC_EF_Music
     public class Track_Album   
     {        
         public int Id { get; set; }
-        [Required]
+        //[Required]
+        [Range(1, int.MaxValue)]
         public int TrackSequence { get; set; }
         [Required]
         public int TrackId { get; set; }

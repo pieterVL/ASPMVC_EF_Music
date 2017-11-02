@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ASPMVC_EF_Music.Track_Album>
+﻿@model ASPMVC_EF_Music.Track_AlbumCreateList
 
 @{
     ViewBag.Title = "Tracks";
@@ -9,17 +9,17 @@
 <div>
     <hr />
     <div class="">
-        @foreach (Track_Album t_a in Model)
+        @foreach (Track_Album t_a in Model.ExistingTrack_Albums)
         {
            <div>
-               <p>TrackSequence: @(t_a.TrackSequence)</p>
-               <p>
-                   Naam:
-                   @Html.ActionLink(t_a.Track.name, "Details", "Track",
+               <h4>
+                  @Html.ActionLink(t_a.Track.name+"."+t_a.Track.Extention, "Details", "Track",
                      new { id = t_a.TrackId },
                      new { @class = "" }
                    )
-               </p>
+               </h4>
+               <p>TrackSequence: @(t_a.TrackSequence)</p>
+               <p>Length: @t_a.Track.length</p>
 
                 @*@Html.ActionLink("Remove", "Removetracklink", "Album",
                  new { id = t_a.Id },
@@ -30,7 +30,7 @@
                {
                    @Html.AntiForgeryToken()
                    <div class="form-actions no-color">
-                       <input type="submit" value="Delete" class="btn btn-xs btn-default" />
+                       <input type="submit" value="Remove" class="btn btn-xs btn-default" />
                    </div>
                }
 
@@ -38,6 +38,42 @@
             </div>
         }
     </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Create new Track Album Link</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.track_album.TrackSequence, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.track_album.TrackSequence,
+                   new { htmlAttributes = new { @class = "form-control", Name = "TrackSequence" } })
+                    @Html.ValidationMessageFor(model => model.track_album.TrackSequence, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.track_album.TrackId, "TrackId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">                    
+                    @Html.DropDownList("TrackId",new SelectList(ViewBag.TrackAlbumSelectList,"Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                    @*@Html.EditorFor(model => model.track_album.TrackId, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.track_album.TrackId, "", new { @class = "text-danger" })
+
+                </div>
+            </div>            
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
 </div>
 
     <div>

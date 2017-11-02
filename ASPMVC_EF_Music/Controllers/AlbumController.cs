@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ASPMVC_EF_Music;
 using ASPMVC_EF_Music.DAL;
+using System.Collections;
 
 namespace ASPMVC_EF_Music.Controllers
 {
@@ -105,13 +106,40 @@ namespace ASPMVC_EF_Music.Controllers
                 return HttpNotFound();
             }
             List<Track_Album> track_albums
-                = db.Track_Album.Where(t_a => t_a.AlbumId == album.Id).ToList();
+                = db.Track_Album.Where(t_a => t_a.AlbumId == album.Id).OrderBy(t_a => t_a.TrackSequence).ToList();
 
+            //need optimazation - no client side filtering
             track_albums.ForEach(t_a => t_a.Track 
                 = db.Tracks.Where(t => t.Id == t_a.TrackId).First()
             );
-            //.OrderBy(t_a => t_a.TrackSequence)
-            return View(track_albums);
+
+            List<Track> AllTracks = db.Tracks.ToList();//need only tracks that are not in this album yet
+
+            List<SelectListItem> SelectlistItems = new List<SelectListItem>();
+            ViewBag.TrackAlbumSelectList = SelectlistItems;
+
+            AllTracks.ForEach(t => SelectlistItems.Add(new SelectListItem() {
+                Text=t.name,
+                Value=t.Id.ToString()
+            }));
+
+            return View(new Track_AlbumCreateList() {
+                track_album = new Track_Album(),
+                ExistingTrack_Albums = track_albums
+            });
+        }
+        // POST: Album/Tracks/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Tracks(int id, [Bind(Include = "TrackId,TrackSequence")] Track_Album t_a)
+        {
+            t_a.AlbumId = id;
+            //Track_Album t_a = db.Track_Album.Find(id);
+            //db.Track_Album.Remove(t_a);
+            db.Track_Album.Add(t_a);
+            db.SaveChanges();
+            return RedirectToAction("Tracks", new { id = t_a.AlbumId });
+
         }
 
         // POST: Album/RemoveTrackLink/5
