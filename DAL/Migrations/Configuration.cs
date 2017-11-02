@@ -1,18 +1,18 @@
-namespace ASPMVC_EF_Music.Migrations
+namespace DAL.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ASPMVC_EF_Music.DAL.MusicContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DAL.MusicContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(ASPMVC_EF_Music.DAL.MusicContext context)
+        protected override void Seed(DAL.MusicContext context)
         {
             //  This method will be called after migrating to the latest version.
 

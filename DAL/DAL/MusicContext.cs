@@ -4,9 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace ASPMVC_EF_Music.DAL
 {
-    public class MusicContext : DbContext
     {
         public MusicContext() : base("ASP_EF_Music") { }
 

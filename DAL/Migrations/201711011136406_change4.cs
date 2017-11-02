@@ -1,4 +1,4 @@
-namespace ASPMVC_EF_Music.Migrations
+namespace DAL.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

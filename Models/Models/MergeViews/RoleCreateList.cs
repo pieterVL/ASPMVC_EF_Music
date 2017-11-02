@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ASPMVC_EF_Music
+namespace DAL
 {
     public class RoleCreateList
     {

@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ASPMVC_EF_Music;
-using ASPMVC_EF_Music.DAL;
+using DAL;
+using DAL.Repository;
 
 namespace ASPMVC_EF_Music.Controllers
 {
     public class PersonController : Controller
     {
-        private MusicContext db = new MusicContext();
+        //private MusicContext db = new MusicContext();
+        private PersonRepository db = new PersonRepository();
 
         // GET: Person
         public ActionResult Index()
         {
-            return View(db.Persons.ToList());
+            return View(db.GetAll());
         }
 
         // GET: Person/Details/5
@@ -28,7 +28,7 @@ namespace ASPMVC_EF_Music.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
+            Person person = db.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -51,8 +51,7 @@ namespace ASPMVC_EF_Music.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Persons.Add(person);
-                db.SaveChanges();
+                db.Add(person);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +65,7 @@ namespace ASPMVC_EF_Music.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
+            Person person = db.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -83,8 +82,7 @@ namespace ASPMVC_EF_Music.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(person).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Update(person);
                 return RedirectToAction("Index");
             }
             return View(person);
@@ -97,7 +95,7 @@ namespace ASPMVC_EF_Music.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Person person = db.Persons.Find(id);
+            Person person = db.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
@@ -110,9 +108,8 @@ namespace ASPMVC_EF_Music.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Person person = db.Persons.Find(id);
-            db.Persons.Remove(person);
-            db.SaveChanges();
+            Person person = db.Find(id);
+            db.Delete(person);
             return RedirectToAction("Index");
         }
 

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
-namespace ASPMVC_EF_Music
+namespace DAL
 {
     public class Track
     {

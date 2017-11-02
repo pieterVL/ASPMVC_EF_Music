@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPMVC_EF_Music", "ASPMVC_EF_Music\ASPMVC_EF_Music.csproj", "{78673A2F-BA57-4279-A4BE-2520FC8E43BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{C7352947-7ACB-43F9-8B09-723298439AF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{370256FB-DCE6-4330-8E37-36CBF1E82513}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{78673A2F-BA57-4279-A4BE-2520FC8E43BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78673A2F-BA57-4279-A4BE-2520FC8E43BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78673A2F-BA57-4279-A4BE-2520FC8E43BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7352947-7ACB-43F9-8B09-723298439AF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7352947-7ACB-43F9-8B09-723298439AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7352947-7ACB-43F9-8B09-723298439AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7352947-7ACB-43F9-8B09-723298439AF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{370256FB-DCE6-4330-8E37-36CBF1E82513}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{370256FB-DCE6-4330-8E37-36CBF1E82513}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{370256FB-DCE6-4330-8E37-36CBF1E82513}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{370256FB-DCE6-4330-8E37-36CBF1E82513}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

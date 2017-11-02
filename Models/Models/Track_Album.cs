@@ -5,17 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ASPMVC_EF_Music
+namespace DAL
 {
-    public class Track_Genre   
+    public class Track_Album   
     {        
         public int Id { get; set; }
+        //[Required]
+        [Range(1, int.MaxValue)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)] //when things need to get messy
+        public int TrackSequence { get; set; }
         [Required]
         public int TrackId { get; set; }
         public Track Track { get; set; }
         [Required]
-        public int GenreID { get; set; }
-        public Genre genre { get; set; }
+        public int AlbumId { get; set; }
+        public Album Album { get; set; }
 
 
 

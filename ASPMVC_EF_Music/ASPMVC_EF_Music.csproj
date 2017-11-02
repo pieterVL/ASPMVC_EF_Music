@@ -44,14 +44,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -134,42 +126,9 @@
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TrackController.cs" />
-    <Compile Include="DAL\MusicContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710131442000_initial.cs" />
-    <Compile Include="Migrations\201710131442000_initial.Designer.cs">
-      <DependentUpon>201710131442000_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710201257024_change2.cs" />
-    <Compile Include="Migrations\201710201257024_change2.Designer.cs">
-      <DependentUpon>201710201257024_change2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710301045350_change-3.cs" />
-    <Compile Include="Migrations\201710301045350_change-3.Designer.cs">
-      <DependentUpon>201710301045350_change-3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710301134207_change21.cs" />
-    <Compile Include="Migrations\201710301134207_change21.Designer.cs">
-      <DependentUpon>201710301134207_change21.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711011136406_change4.cs" />
-    <Compile Include="Migrations\201711011136406_change4.Designer.cs">
-      <DependentUpon>201711011136406_change4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Album.cs" />
-    <Compile Include="Models\Genre.cs" />
-    <Compile Include="Models\MergeViews\Track_AlbumCreateList.cs" />
-    <Compile Include="Models\MergeViews\RoleCreateList.cs" />
-    <Compile Include="Models\MergeViews\GenreCreateList.cs" />
-    <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\Track.cs" />
-    <Compile Include="Models\Track_Album.cs" />
-    <Compile Include="Models\Track_Genre.cs" />
-    <Compile Include="Models\Track_Person_Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -195,13 +154,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -235,6 +187,13 @@
     <Content Include="Views\Genre\Edit.cshtml" />
     <Content Include="Views\Genre\Index.cshtml" />
     <Content Include="Views\Album\Tracks.cshtml" />
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -248,21 +207,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710131442000_initial.resx">
-      <DependentUpon>201710131442000_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710201257024_change2.resx">
-      <DependentUpon>201710201257024_change2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710301045350_change-3.resx">
-      <DependentUpon>201710301045350_change-3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710301134207_change21.resx">
-      <DependentUpon>201710301134207_change21.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711011136406_change4.resx">
-      <DependentUpon>201711011136406_change4.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{c7352947-7acb-43f9-8b09-723298439af7}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{370256fb-dce6-4330-8e37-36cbf1e82513}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

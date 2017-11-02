@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ASPMVC_EF_Music
+namespace DAL
 {
     public class Role
     {

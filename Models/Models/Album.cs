@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ASPMVC_EF_Music
+namespace DAL
 {
     public class Album
     {

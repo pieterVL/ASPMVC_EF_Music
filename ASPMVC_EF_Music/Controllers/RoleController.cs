@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ASPMVC_EF_Music;
-using ASPMVC_EF_Music.DAL;
-
+using DAL;
+using DAL.Repository;
 namespace ASPMVC_EF_Music.Controllers
 {
     public class RoleController : Controller
     {
-        private MusicContext db = new MusicContext();
+        //private MusicContext db = new MusicContext();
+        private RoleRepository db = new RoleRepository();
 
         // GET: Role
         public ActionResult Index()
         {            
             return View(new RoleCreateList() {
                 Role = new Role() { role=""},
-                ExistingRoles = db.Roles.ToList()
+                ExistingRoles = db.GetAll()
             });
         }
 
@@ -30,8 +29,7 @@ namespace ASPMVC_EF_Music.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Roles.Add(role);
-                db.SaveChanges();
+                db.Add(role);
                 return RedirectToAction("Index");
             }
 
@@ -45,7 +43,7 @@ namespace ASPMVC_EF_Music.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role role = db.Roles.Find(id);
+            Role role = db.Find(id);
             if (role == null)
             {
                 return HttpNotFound();
@@ -60,7 +58,7 @@ namespace ASPMVC_EF_Music.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role role = db.Roles.Find(id);
+            Role role = db.Find(id);
             if (role == null)
             {
                 return HttpNotFound();
@@ -77,8 +75,7 @@ namespace ASPMVC_EF_Music.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(role).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Update(role);
                 return RedirectToAction("Index");
             }
             return View(role);
@@ -91,7 +88,7 @@ namespace ASPMVC_EF_Music.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role role = db.Roles.Find(id);
+            Role role = db.Find(id);
             if (role == null)
             {
                 return HttpNotFound();
@@ -104,9 +101,8 @@ namespace ASPMVC_EF_Music.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Role role = db.Roles.Find(id);
-            db.Roles.Remove(role);
-            db.SaveChanges();
+            Role role = db.Find(id);
+            db.Delete(role);
             return RedirectToAction("Index");
         }
 

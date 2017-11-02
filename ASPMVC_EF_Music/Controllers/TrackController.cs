@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ASPMVC_EF_Music;
-using ASPMVC_EF_Music.DAL;
+using DAL;
+using DAL.Repository;
 
 namespace ASPMVC_EF_Music.Controllers
 {
     public class TrackController : Controller
     {
-        private MusicContext db = new MusicContext();
+        private TrackRepository db = new TrackRepository();
+         
         private List<String> ExtentionsList = new List<string>()
         {
               "mp3", "wav","3gp","ogg","mwa"
@@ -23,7 +23,7 @@ namespace ASPMVC_EF_Music.Controllers
         // GET: Track
         public ActionResult Index()
         {
-            return View(db.Tracks.ToList());
+            return View(db.GetAll());
         }
 
         // GET: Track/Details/5
@@ -33,7 +33,7 @@ namespace ASPMVC_EF_Music.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Track track = db.Tracks.Find(id);
+            Track track = db.Find(id);
             if (track == null)
             {
                 return HttpNotFound();
@@ -57,8 +57,7 @@ namespace ASPMVC_EF_Music.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Tracks.Add(track);
-                db.SaveChanges();
+                db.Add(track);
                 return RedirectToAction("Index");
             }
 
@@ -72,7 +71,7 @@ namespace ASPMVC_EF_Music.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Track track = db.Tracks.Find(id);
+            Track track = db.Find(id);
             if (track == null)
             {
                 return HttpNotFound();
@@ -90,13 +89,12 @@ namespace ASPMVC_EF_Music.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(track).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Update(track);
                 return RedirectToAction("Index");
             }
             return View(track);
         }
-
+       
         // GET: Track/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -104,7 +102,7 @@ namespace ASPMVC_EF_Music.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Track track = db.Tracks.Find(id);
+            Track track = db.Find(id);
             if (track == null)
             {
                 return HttpNotFound();
@@ -117,9 +115,8 @@ namespace ASPMVC_EF_Music.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Track track = db.Tracks.Find(id);
-            db.Tracks.Remove(track);
-            db.SaveChanges();
+            Track track = db.Find(id);
+            db.Delete(track);
             return RedirectToAction("Index");
         }
 

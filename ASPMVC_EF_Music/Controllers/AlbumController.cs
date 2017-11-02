@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ASPMVC_EF_Music;
-using ASPMVC_EF_Music.DAL;
 using System.Collections;
+using DAL;
+using DAL.Repository;
 
 namespace ASPMVC_EF_Music.Controllers
 {
     public class AlbumController : Controller
     {
-        private MusicContext db = new MusicContext();
+        //private MusicContext db = new MusicContext();
+        private AlbumRepository db = new AlbumRepository();
 
         // GET: Album
         public ActionResult Index()
         {
-            return View(db.Albums.ToList());
+            return View(db.GetAll());
         }
 
         // GET: Album/Details/5
@@ -29,7 +30,7 @@ namespace ASPMVC_EF_Music.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
+            Album album = db.Find(id);
             if (album == null)
             {
                 return HttpNotFound();
@@ -52,8 +53,7 @@ namespace ASPMVC_EF_Music.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Albums.Add(album);
-                db.SaveChanges();
+                db.Add(album);
                 return RedirectToAction("Index");
             }
 
@@ -67,7 +67,7 @@ namespace ASPMVC_EF_Music.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
+            Album album = db.Find(id);
             if (album == null)
             {
                 return HttpNotFound();
@@ -84,8 +84,7 @@ namespace ASPMVC_EF_Music.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(album).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Update(album);
                 return RedirectToAction("Index");
             }
             return View(album);
@@ -94,50 +93,50 @@ namespace ASPMVC_EF_Music.Controllers
         // GET: Album/Tracks/5
         public ActionResult Tracks(int? id)
         {
+            return null;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Album album = db.Albums.Find(id);          
+            Album album = db.Find(id);          
 
             if (album == null)
             {
                 return HttpNotFound();
             }
-            List<Track_Album> track_albums
-                = db.Track_Album.Where(t_a => t_a.AlbumId == album.Id).OrderBy(t_a => t_a.TrackSequence).ToList();
+            //List<Track_Album> track_albums
+            //    = db.Track_Album.Where(t_a => t_a.AlbumId == album.Id).OrderBy(t_a => t_a.TrackSequence).ToList();
 
             //need optimazation - no client side filtering
-            track_albums.ForEach(t_a => t_a.Track 
-                = db.Tracks.Where(t => t.Id == t_a.TrackId).First()
-            );
+            //track_albums.ForEach(t_a => t_a.Track 
+            //    = db.Tracks.Where(t => t.Id == t_a.TrackId).First()
+            //);
 
-            List<Track> AllTracks = db.Tracks.ToList();//need only tracks that are not in this album yet
+            //List<Track> AllTracks = db.get();//need only tracks that are not in this album yet
 
-            List<SelectListItem> SelectlistItems = new List<SelectListItem>();
-            ViewBag.TrackAlbumSelectList = SelectlistItems;
+            //List<SelectListItem> SelectlistItems = new List<SelectListItem>();
+            //ViewBag.TrackAlbumSelectList = SelectlistItems;
 
-            AllTracks.ForEach(t => SelectlistItems.Add(new SelectListItem() {
-                Text=t.name,
-                Value=t.Id.ToString()
-            }));
+            //AllTracks.ForEach(t => SelectlistItems.Add(new SelectListItem() {
+            //    Text=t.name,
+            //    Value=t.Id.ToString()
+            //}));
 
-            return View(new Track_AlbumCreateList() {
-                track_album = new Track_Album(),
-                ExistingTrack_Albums = track_albums
-            });
+            //return View(new Track_AlbumCreateList() {
+            //    track_album = new Track_Album(),
+            //    ExistingTrack_Albums = track_albums
+            //});
         }
         // POST: Album/Tracks/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Tracks(int id, [Bind(Include = "TrackId,TrackSequence")] Track_Album t_a)
         {
+            return null;
             t_a.AlbumId = id;
-            //Track_Album t_a = db.Track_Album.Find(id);
-            //db.Track_Album.Remove(t_a);
-            db.Track_Album.Add(t_a);
-            db.SaveChanges();
+            //db.Track_Album.Add(t_a);
+            //db.SaveChanges();
             return RedirectToAction("Tracks", new { id = t_a.AlbumId });
 
         }
@@ -147,10 +146,11 @@ namespace ASPMVC_EF_Music.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RemoveTrackLink(int id)
         {
-            Track_Album t_a = db.Track_Album.Find(id);
-            db.Track_Album.Remove(t_a);
-            db.SaveChanges();
-            return RedirectToAction("Tracks",new {id= t_a.AlbumId });
+            return null;
+            //Track_Album t_a = db.Track_Album.Find(id);
+            //db.Track_Album.Remove(t_a);
+            //db.SaveChanges();
+            //return RedirectToAction("Tracks",new {id= t_a.AlbumId });
             
         }
 
@@ -161,7 +161,7 @@ namespace ASPMVC_EF_Music.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
+            Album album = db.Find(id);
             if (album == null)
             {
                 return HttpNotFound();
@@ -174,9 +174,8 @@ namespace ASPMVC_EF_Music.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Album album = db.Albums.Find(id);
-            db.Albums.Remove(album);
-            db.SaveChanges();
+            Album album = db.Find(id);
+            db.Delete(album);
             return RedirectToAction("Index");
         }
 

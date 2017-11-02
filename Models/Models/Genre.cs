@@ -5,14 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ASPMVC_EF_Music
+namespace DAL
 {
-    public class Person
+    public class Genre
     {
         public int Id { get; set; }
         [Required]
-        public string name { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime dayOfBirth { get; set; }
+        public string genreName { get; set; }
     }
 }
