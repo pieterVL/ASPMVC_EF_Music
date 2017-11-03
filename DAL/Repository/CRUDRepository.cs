@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository
 {
-    public class CRUDRepository<T> : IRepository<T>
+    public class CRUDRepository<T> : IRepository<T>, IDisposable
         where T:class
     {
-        private DbContext db;
-        private DbSet<T> Dbset;
+        protected DbContext db;
+        protected DbSet<T> Dbset;
         public CRUDRepository(DbContext Context, DbSet<T> Dbset) {
             this.db = Context;
             this.Dbset = Dbset;

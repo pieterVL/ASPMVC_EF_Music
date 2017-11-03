@@ -24,4 +24,17 @@ namespace DAL.Repository
 
     public class TrackRepository : CRUDRepository<Track>
     { public TrackRepository() : base(Context.temp = new MusicContext(), Context.temp.Tracks){}}
+
+    //Juction Classes
+    public class Track_AlbumRepository : CRUDRepository<Track_Album>
+    { public Track_AlbumRepository() : base(Context.temp = new MusicContext(), Context.temp.Track_Album) { }
+        public List<Track_Album> GetAllTracksFromAlbum(int AlbumId) {
+            return Dbset.SqlQuery(String.Format(@"
+                SELECT Id,TrackSequence,TrackId,AlbumId
+                  FROM dbo.Track_Album
+                  WHERE {0}= AlbumId
+                  Order By TrackSequence",AlbumId)
+            ).ToList();
+        }
+    }
 }
