@@ -15,34 +15,28 @@ namespace ASPMVC_EF_Music.Controllers
     {
         private Track_GenreRepository db = new Track_GenreRepository();
 
-        // GET: Track_Genre
-        public ActionResult Index()
+        // GET: Track_Genre/index/5
+        public ActionResult Index(int? id)
         {
-            var track_Genre = db.DBTrack_Genre.Include(t => t.genre).Include(t => t.Track);
+            Track track;
+            if (id == null || (track = db.DBTrack.Find(id)) == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var track_Genre = db.DBTrack_Genre.Include(t => t.genre).Include(t => t.Track).Where(t=>t.TrackId==id);
+            ViewBag.Track = track;
             return View(track_Genre.ToList());
         }
 
-        // GET: Track_Genre/Details/5
-        public ActionResult Details(int? id)
+        // GET: Track_Genre/Create
+        public ActionResult Create(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Track_Genre track_Genre = db.DBTrack_Genre.Find(id);
-            if (track_Genre == null)
-            {
-                return HttpNotFound();
-            }
-            return View(track_Genre);
-        }
-
-        // GET: Track_Genre/Create
-        public ActionResult Create()
-        {
             ViewBag.GenreID = new SelectList(db.DBGenre, "Id", "genreName");
-            ViewBag.TrackId = new SelectList(db.DBTrack, "Id", "name");
-            return View();
+            return View(new Track_Genre() {TrackId=id.Value});
         }
 
         // POST: Track_Genre/Create
@@ -54,12 +48,11 @@ namespace ASPMVC_EF_Music.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.DBTrack_Genre.Add(track_Genre);
-                return RedirectToAction("Index");
+                db.Add(track_Genre);
+                return RedirectToAction("Index", new { id = track_Genre.TrackId});
             }
 
             ViewBag.GenreID = new SelectList(db.DBGenre, "Id", "genreName", track_Genre.GenreID);
-            ViewBag.TrackId = new SelectList(db.DBGenre, "Id", "name", track_Genre.TrackId);
             return View(track_Genre);
         }
 
@@ -76,7 +69,6 @@ namespace ASPMVC_EF_Music.Controllers
                 return HttpNotFound();
             }
             ViewBag.GenreID = new SelectList(db.DBGenre, "Id", "genreName", track_Genre.GenreID);
-            ViewBag.TrackId = new SelectList(db.DBTrack, "Id", "name", track_Genre.TrackId);
             return View(track_Genre);
         }
 
@@ -90,36 +82,20 @@ namespace ASPMVC_EF_Music.Controllers
             if (ModelState.IsValid)
             {
                 db.Update(track_Genre);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = track_Genre.TrackId });
             }
             ViewBag.GenreID = new SelectList(db.DBGenre, "Id", "genreName", track_Genre.GenreID);
-            ViewBag.TrackId = new SelectList(db.DBTrack, "Id", "name", track_Genre.TrackId);
-            return View(track_Genre);
-        }
-
-        // GET: Track_Genre/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Track_Genre track_Genre = db.DBTrack_Genre.Find(id);
-            if (track_Genre == null)
-            {
-                return HttpNotFound();
-            }
             return View(track_Genre);
         }
 
         // POST: Track_Genre/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
             Track_Genre track_Genre = db.DBTrack_Genre.Find(id);
             db.Delete(track_Genre);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = track_Genre.TrackId});
         }
 
         protected override void Dispose(bool disposing)

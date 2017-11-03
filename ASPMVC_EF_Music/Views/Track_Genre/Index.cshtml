@@ -1,39 +1,42 @@
 ﻿@model IEnumerable<DAL.Track_Genre>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Genres";
 }
 
-<h2>Index</h2>
+<h2>Genres of @ViewBag.Track.name</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { id = ViewBag.Track.Id })
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.genre.genreName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Track.name)
-        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var t_a in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.genre.genreName)
+            @Html.DisplayFor(modelItem => t_a.genre.genreName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Track.name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id=t_a.Id })
+            @using (Html.BeginForm("Delete", "Track_Genre", new { id = t_a.Id }, FormMethod.Post, null))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-xs btn-default" />
+                </div>
+            }
         </td>
     </tr>
 }
 
 </table>
+
+@Html.ActionLink("Back to Track", "Index", "Track")
+<i class="glyphicon glyphicon-road"></i>
