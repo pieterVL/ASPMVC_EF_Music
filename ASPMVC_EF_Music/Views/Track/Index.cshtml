@@ -43,3 +43,13 @@
 }
 
 </table>
+
+@Html.ActionLink("Get CSV", "GetCSV")
+<hr />
+<p>Insert Bulk from CSV</p>
+@using (Html.BeginForm("SetCSV", "Track", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="text" name="file" />
+    <input type="submit" value="OK" />
+}

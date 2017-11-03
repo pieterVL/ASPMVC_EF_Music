@@ -23,7 +23,12 @@ namespace DAL.Repository
     { public RoleRepository() : base(Context.temp = new MusicContext(), Context.temp.Roles){}}
 
     public class TrackRepository : CRUDRepository<Track>
-    { public TrackRepository() : base(Context.temp = new MusicContext(), Context.temp.Tracks){}}
+    { public TrackRepository() : base(Context.temp = new MusicContext(), Context.temp.Tracks){}
+        public void InsertBulk(IEnumerable<Track> Entities)
+        {
+            Dbset.AddRange(Entities);
+        }
+    }
 
     //Juction Classes
     public class Track_AlbumRepository : CRUDRepository<Track_Album>
@@ -37,4 +42,7 @@ namespace DAL.Repository
             ).ToList();
         }
     }
+
+    public class Track_GenreRepository : CRUDTrack_GenreRepository<Track_Genre,Track,Genre>
+    { public Track_GenreRepository() : base(Context.temp = new MusicContext(), Context.temp.Track_Genre,Context.temp.Tracks,Context.temp.Genres) { } }
 }
