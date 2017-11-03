@@ -147,13 +147,51 @@ namespace ASPMVC_EF_Music.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RemoveTrackLink(int id)
         {
-            return null;
-            //Track_Album t_a = db.Track_Album.Find(id);
-            //db.Track_Album.Remove(t_a);
-            //db.SaveChanges();
-            //return RedirectToAction("Tracks",new {id= t_a.AlbumId });
-            
+            Track_Album t_a = T_aDB.Find(id);
+            T_aDB.Delete(t_a);
+            return RedirectToAction("Tracks", new { id = t_a.AlbumId });
+
         }
+
+        // GET: Album/EditTrack/5
+        public ActionResult EditTrack(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Track_Album t_a = T_aDB.Find(id);
+            if (t_a == null)
+            {
+                return HttpNotFound();
+            }
+
+            List<SelectListItem> selectList = getSelectlistAvailableTracksInAlbum(t_a.AlbumId);
+            selectList.Add(new SelectListItem()
+            {
+                Text = t_a.Track.name+" (current)",
+                Value = t_a.TrackId.ToString()
+            });
+            ViewBag.TrackAlbumSelectList = selectList;
+
+            return View(t_a);
+        }
+
+        // POST: Album/EditTrack/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditTrack([Bind(Include = "Id,TrackSequence,TrackId,AlbumId")] Track_Album t_a)
+        {
+            if (ModelState.IsValid)
+            {
+                T_aDB.Update(t_a);
+                return RedirectToAction("Tracks", new { id = t_a.AlbumId });
+            }
+            return View(t_a);
+        }
+
 
         // GET: Album/Delete/5
         public ActionResult Delete(int? id)
@@ -187,6 +225,27 @@ namespace ASPMVC_EF_Music.Controllers
                 AlbumDB.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        //_______________________________________________________________________________//
+        private List<SelectListItem> getSelectlistAvailableTracksInAlbum(int? albumId)
+        {
+            List<Track_Album> track_albums = T_aDB.GetAllTracksFromAlbum((int)albumId);
+            IEnumerable<int> trackIDs = track_albums.Select(t_a => t_a.TrackId);
+
+            IEnumerable<Track> AllTracks;
+            using (TrackRepository TrackDB = new TrackRepository())
+            {
+                AllTracks = TrackDB.GetAll().Where(t => !trackIDs.Contains(t.Id));
+            }
+
+            return AllTracks.Select(t =>
+            new SelectListItem
+            {
+                Text = t.name,
+                Value = t.Id.ToString()
+            }).ToList();
         }
     }
 }
