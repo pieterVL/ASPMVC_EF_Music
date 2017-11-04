@@ -1,6 +1,7 @@
 ﻿using DAL.DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,14 @@ namespace DAL.Repository
     { public TrackRepository() : base(Context.temp = new MusicContext(), Context.temp.Tracks){}
         public void InsertBulk(IEnumerable<Track> Entities)
         {
+            foreach (Track track in Entities)
+            {
+                if(db.Entry(track).State == EntityState.Detached)
+                {
+                    Dbset.Add(track);
+                }
+            }
+            db.SaveChanges();
             Dbset.AddRange(Entities);
         }
     }

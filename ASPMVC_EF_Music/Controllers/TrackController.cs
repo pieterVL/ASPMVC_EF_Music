@@ -136,38 +136,15 @@ namespace ASPMVC_EF_Music.Controllers
                 byte[] array = Encoding.ASCII.GetBytes(text);
                 return File(array, System.Net.Mime.MediaTypeNames.Text.Plain);
             }
-
-            //using (TextWriter fileReader = System.IO.File.CreateText(path))
-            //{
-            //    var csv = new CsvWriter(fileReader,);
-            //    csv.WriteRecords(db.GetAll());
-            //}
-           ////return File(path, System.Net.Mime.MediaTypeNames.Text.Plain);
-            //using (TextReader fileReader = System.IO.File.OpenText(path))
-            //{
-            //    var csv = new CsvReader(fileReader);
-            //    csv.GetRecords<Track>();
-            //}
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SetCSV(string csvtxt)
         {
-            //if (file != null && file.Length > 0)
-            //{
-            //    using (MemoryStream stream = new MemoryStream())
-            //    {
-            //        //file.InputStream.CopyTo(stream);
-            //        //using (var reader = new StreamReader(stream))
-            //        using (var reader = new StreamReader(file.InputStream))
-            //        using (var csv = new CsvReader(reader)) {
-            //            var records = csv.GetRecords<Track>();                            
-            //            db.InsertBulk(records);
-            //        }
-            //    }
-            //}
+         
             using (StringReader stringReader = new StringReader(csvtxt))
-            using (var csv = new CsvReader(stringReader)) {
+            using (CsvReader csv = new CsvReader(stringReader))
+            {
                 IEnumerable<Track> records = csv.GetRecords<Track>();
                 db.InsertBulk(records);
             }
