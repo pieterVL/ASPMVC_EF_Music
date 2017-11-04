@@ -15,20 +15,29 @@ namespace ASPMVC_EF_Music.Controllers
     {
         private Track_Person_RoleRepository db = new Track_Person_RoleRepository();
 
-        // GET: Track_Person_Role
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var track_Person_Role = db.DBTrack_Genre.Include(t => t.Person).Include(t => t.Role).Include(t => t.Track);
+            Track track;
+            if (id == null || (track = db.DBTrack.Find(id)) == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            var track_Person_Role = db.DBTrack_Genre.Include(t => t.Person).Include(t => t.Role).Include(t => t.Track).Where(t=>t.TrackId == track.Id).OrderBy(t=>t.PersonId);
+            ViewBag.Track = track;
             return View(track_Person_Role.ToList());
         }       
 
         // GET: Track_Person_Role/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             ViewBag.PersonId = new SelectList(db.DBPerson, "Id", "name");
             ViewBag.RoleId = new SelectList(db.DBRole, "Id", "role");
-            ViewBag.TrackId = new SelectList(db.DBTrack, "Id", "name");
-            return View();
+            return View(new Track_Person_Role() { TrackId = id.Value});
         }
 
         // POST: Track_Person_Role/Create
@@ -41,7 +50,7 @@ namespace ASPMVC_EF_Music.Controllers
             if (ModelState.IsValid)
             {
                 db.Add(track_Person_Role);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = track_Person_Role.TrackId });
             }
 
             ViewBag.PersonId = new SelectList(db.DBPerson, "Id", "name", track_Person_Role.PersonId);
@@ -65,7 +74,6 @@ namespace ASPMVC_EF_Music.Controllers
 
             ViewBag.PersonId = new SelectList(db.DBPerson, "Id", "name", track_Person_Role.PersonId);
             ViewBag.RoleId = new SelectList(db.DBRole, "Id", "role", track_Person_Role.RoleId);
-            ViewBag.TrackId = new SelectList(db.DBTrack, "Id", "name", track_Person_Role.TrackId);
             return View(track_Person_Role);
         }
 
@@ -79,7 +87,7 @@ namespace ASPMVC_EF_Music.Controllers
             if (ModelState.IsValid)
             {
                 db.Update(track_Person_Role);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = track_Person_Role.TrackId });
             }
             ViewBag.PersonId = new SelectList(db.DBPerson, "Id", "name", track_Person_Role.PersonId);
             ViewBag.RoleId = new SelectList(db.DBRole, "Id", "role", track_Person_Role.RoleId);
@@ -109,7 +117,7 @@ namespace ASPMVC_EF_Music.Controllers
         {
             Track_Person_Role track_Person_Role = db.Find(id);
             db.Delete(track_Person_Role);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = track_Person_Role.TrackId });
         }
 
         protected override void Dispose(bool disposing)

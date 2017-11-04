@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Authors of @ViewBag.track.name</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", new { id = ViewBag.Track.Id })
 </p>
 <table class="table">
     <tr>
@@ -17,22 +17,27 @@
         <th>
             @Html.DisplayNameFor(model => model.Role.role)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Track.name)
-        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@{ int lastPersonId=0;}
+@foreach (var item in Model)
+{
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Person.name)
-        </td>
+       
+        @if (lastPersonId != item.PersonId)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Person.name)
+                @{lastPersonId = item.PersonId;}
+            </td>
+        }else
+        {
+           <td style="border-top-width:0"></td>
+        }
+
         <td>
             @Html.DisplayFor(modelItem => item.Role.role)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Track.name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
@@ -42,3 +47,5 @@
 }
 
 </table>
+@Html.ActionLink("Back to Track", "Index", "Track")
+<i class="glyphicon glyphicon-road"></i>

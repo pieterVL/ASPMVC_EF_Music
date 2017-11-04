@@ -37,7 +37,8 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=track.Id }) |
             @Html.ActionLink("Details", "Details", new { id=track.Id }) |
-            @Html.ActionLink("Genres","Index","Track_Genre", new { id = track.Id }, null) |
+            @Html.ActionLink("Genres", "Index", "Track_Genre", new { id = track.Id }, null) |
+            @Html.ActionLink("Authors","Index", "Track_Person_Role", new { id = track.Id }, null) |
             @Html.ActionLink("Delete", "Delete", new { id=track.Id })
         </td>
     </tr>
