@@ -19,5 +19,9 @@ namespace DAL.DAL
         public DbSet<Track_Album> Track_Album { get; set; }
         public DbSet<Track_Person_Role> Track_Person_Role { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //base.OnModelCreating(modelBuilder);
+        }
     }
 }

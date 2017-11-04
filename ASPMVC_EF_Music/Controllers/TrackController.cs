@@ -148,6 +148,7 @@ namespace ASPMVC_EF_Music.Controllers
                 IEnumerable<Track> records = csv.GetRecords<Track>();
                 db.InsertBulk(records);
             }
+
             return RedirectToAction("Index");
         }
 

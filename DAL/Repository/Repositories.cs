@@ -20,9 +20,6 @@ namespace DAL.Repository
     public class PersonRepository : CRUDRepository<Person>
     { public PersonRepository() : base(Context.temp = new MusicContext(), Context.temp.Persons){}}
 
-    public class RoleRepository : CRUDRepository<Role>
-    { public RoleRepository() : base(Context.temp = new MusicContext(), Context.temp.Roles){}}
-
     public class TrackRepository : CRUDRepository<Track>
     { public TrackRepository() : base(Context.temp = new MusicContext(), Context.temp.Tracks){}
         public void InsertBulk(IEnumerable<Track> Entities)
@@ -37,6 +34,13 @@ namespace DAL.Repository
             db.SaveChanges();
             Dbset.AddRange(Entities);
         }
+    }
+    public class RoleRepository : CRUDRepository<Role>
+    { public RoleRepository() : base(Context.temp = new MusicContext(), Context.temp.Roles) { }
+        //public override void Update(Role role)
+        //{
+        //    this.db.Database.SqlQuery<Role>("EXECUTE UpdateRole", role.Id,role.role);            
+        //}
     }
 
     //Juction Classes

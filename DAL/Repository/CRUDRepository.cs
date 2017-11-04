@@ -35,7 +35,7 @@ namespace DAL.Repository
         virtual public void Update(T t)
         {
             db.Entry(t).State = EntityState.Modified;
-            db.SaveChanges();        
+            db.SaveChanges();                    
         }
         virtual public void Delete(T t)
         {
