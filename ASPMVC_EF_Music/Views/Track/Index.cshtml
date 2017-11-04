@@ -51,6 +51,6 @@
 @using (Html.BeginForm("SetCSV", "Track", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <input type="text" name="file" />
+    <textarea name="csvtxt"></textarea>
     <input type="submit" value="OK" />
 }

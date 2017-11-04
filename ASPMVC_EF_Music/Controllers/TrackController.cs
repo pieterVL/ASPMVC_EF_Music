@@ -151,7 +151,7 @@ namespace ASPMVC_EF_Music.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SetCSV(string file)
+        public ActionResult SetCSV(string csvtxt)
         {
             //if (file != null && file.Length > 0)
             //{
@@ -166,9 +166,9 @@ namespace ASPMVC_EF_Music.Controllers
             //        }
             //    }
             //}
-            using (TextReader textReader = new StringReader(file))
-            using (var csv = new CsvReader(textReader)) {
-                var records = csv.GetRecords<Track>();
+            using (StringReader stringReader = new StringReader(csvtxt))
+            using (var csv = new CsvReader(stringReader)) {
+                IEnumerable<Track> records = csv.GetRecords<Track>();
                 db.InsertBulk(records);
             }
             return RedirectToAction("Index");

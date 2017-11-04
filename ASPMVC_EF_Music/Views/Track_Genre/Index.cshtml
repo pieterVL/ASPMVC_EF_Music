@@ -20,7 +20,8 @@
 @foreach (var t_a in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => t_a.genre.genreName)
+            @*@Html.DisplayFor(modelItem => t_a.genre.genreName)*@
+            @Html.ActionLink(t_a.genre.genreName,"Details","Genre", new { Id = t_a.GenreID}, null)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=t_a.Id })

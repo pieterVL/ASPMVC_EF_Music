@@ -139,6 +139,7 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="Controllers\Track_GenreController.cs" />
+    <Compile Include="Controllers\Track_Person_RoleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,6 +208,10 @@
     <Content Include="Views\Track_Genre\Delete.cshtml" />
     <Content Include="Views\Track_Genre\Edit.cshtml" />
     <Content Include="Views\Track_Genre\Index.cshtml" />
+    <Content Include="Views\Track_Person_Role\Create.cshtml" />
+    <Content Include="Views\Track_Person_Role\Delete.cshtml" />
+    <Content Include="Views\Track_Person_Role\Edit.cshtml" />
+    <Content Include="Views\Track_Person_Role\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

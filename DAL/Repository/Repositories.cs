@@ -45,4 +45,7 @@ namespace DAL.Repository
 
     public class Track_GenreRepository : CRUDTrack_GenreRepository<Track_Genre,Track,Genre>
     { public Track_GenreRepository() : base(Context.temp = new MusicContext(), Context.temp.Track_Genre,Context.temp.Tracks,Context.temp.Genres) { } }
+
+    public class Track_Person_RoleRepository : CRUDTrack_Person_RoleRepository<Track_Person_Role, Track, Person, Role>
+    { public Track_Person_RoleRepository() : base(Context.temp = new MusicContext(), Context.temp.Track_Person_Role, Context.temp.Tracks, Context.temp.Persons, Context.temp.Roles) { } }
 }
