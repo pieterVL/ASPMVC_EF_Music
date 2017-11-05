@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,10 +38,14 @@ namespace DAL.Repository
     }
     public class RoleRepository : CRUDRepository<Role>
     { public RoleRepository() : base(Context.temp = new MusicContext(), Context.temp.Roles) { }
-        //public override void Update(Role role)
-        //{
-        //    this.db.Database.SqlQuery<Role>("EXECUTE UpdateRole", role.Id,role.role);            
-        //}
+        public override void Update(Role role)
+        {
+            this.db.Database.ExecuteSqlCommand("UpdateRole @id, @role",
+                new SqlParameter("@id",role.Id),
+                new SqlParameter("@role", role.role)
+               );
+            //db.SaveChanges();
+        }
     }
 
     //Juction Classes
