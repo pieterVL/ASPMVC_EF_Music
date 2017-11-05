@@ -6,7 +6,7 @@ using System.Web;
 
 namespace DAL.DAL
 {
-    internal class MusicContext : DbContext
+    public class MusicContext : DbContext
     {
         public MusicContext() : base("ASP_EF_Music") { }
 
