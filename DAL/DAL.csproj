@@ -50,49 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\MusicContext.cs" />
-    <Compile Include="Migrations\201710131442000_initial.cs" />
-    <Compile Include="Migrations\201710131442000_initial.Designer.cs">
-      <DependentUpon>201710131442000_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710201257024_change2.cs" />
-    <Compile Include="Migrations\201710201257024_change2.Designer.cs">
-      <DependentUpon>201710201257024_change2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710301045350_change-3.cs" />
-    <Compile Include="Migrations\201710301045350_change-3.Designer.cs">
-      <DependentUpon>201710301045350_change-3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710301134207_change21.cs" />
-    <Compile Include="Migrations\201710301134207_change21.Designer.cs">
-      <DependentUpon>201710301134207_change21.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711011136406_change4.cs" />
-    <Compile Include="Migrations\201711011136406_change4.Designer.cs">
-      <DependentUpon>201711011136406_change4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CRUDJunctionRepository.cs" />
     <Compile Include="Repository\Repositories.cs" />
     <Compile Include="Repository\CRUDRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710131442000_initial.resx">
-      <DependentUpon>201710131442000_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710201257024_change2.resx">
-      <DependentUpon>201710201257024_change2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710301045350_change-3.resx">
-      <DependentUpon>201710301045350_change-3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710301134207_change21.resx">
-      <DependentUpon>201710301134207_change21.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711011136406_change4.resx">
-      <DependentUpon>201711011136406_change4.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

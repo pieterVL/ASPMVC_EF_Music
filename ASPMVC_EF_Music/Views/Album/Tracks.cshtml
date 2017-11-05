@@ -61,10 +61,12 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.track_album.TrackId, "TrackId", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10"> 
-                    
+                    @{ bool submitAble = true;}
+                  
                     @if (@ViewBag.TrackAlbumSelectList.Count == 0)
                     {
                         <p>You can't add any more tracks.</p>
+                        submitAble = false;
                     }
                     else
                     {
@@ -81,7 +83,8 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                  @if (submitAble)
+                  { <input id="create" type="submit" value="Create" class="btn btn-default" />}
                 </div>
             </div>
         </div>
